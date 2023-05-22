@@ -13,6 +13,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            
+            VStack {
+                currentThemeText
+                scoreText
+            }
+            .padding()
+
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
                     ForEach(viewModel.cards) { card in
@@ -24,9 +31,37 @@ struct ContentView: View {
                     }
                 }
             }
-            .foregroundColor(.red)
+            .foregroundColor(viewModel.themeColor)
             .padding(.horizontal)
+            
+            newThemeButton
         }
+    }
+}
+
+
+// MARK: - COMPONENTS
+
+extension ContentView {
+    
+    private var currentThemeText: some View {
+        Text("\(viewModel.themeName)")
+            .font(.largeTitle)
+    }
+    
+    private var scoreText: some View {
+        Text("Score : \(viewModel.score)")
+            .font(.body)
+    }
+    
+    private var newThemeButton: some View {
+        Button {
+            viewModel.chooseTheme()
+        } label: {
+            Text("New Game")
+                .font(.title)
+        }
+        .padding()
     }
 }
 
@@ -72,6 +107,7 @@ struct CardView: View {
 
 
 
+// MARK: - PREVIEWS
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
