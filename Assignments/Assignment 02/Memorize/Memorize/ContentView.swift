@@ -17,6 +17,7 @@ struct ContentView: View {
             VStack {
                 currentThemeText
                 scoreText
+                numberOfPairsText
             }
             .padding()
 
@@ -51,6 +52,11 @@ extension ContentView {
     
     private var scoreText: some View {
         Text("Score : \(viewModel.score)")
+            .font(.body)
+    }
+    
+    private var numberOfPairsText: some View {
+        Text("\(viewModel.numberOfPairs) Pairs")
             .font(.body)
     }
     

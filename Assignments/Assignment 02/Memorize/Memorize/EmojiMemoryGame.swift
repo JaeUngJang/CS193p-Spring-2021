@@ -19,25 +19,25 @@ class EmojiMemoryGame: ObservableObject {
         Theme(
             name: "Vehicle",
             emojis: ["🚂", "✈️", "🚲", "🚁", "🏎", "🚌", "🚍", "🚎", "🚐", "🚑", "🚒", "🚓", "🚔", "🚕", "🚖", "🚗", "🚙", "🚚", "🛻", "🛴", "🛵", "🏍", "🚜","🚞"],
-            numberOfPairsOfCards: 10,
+            numberOfPairsOfCards: nil,
             cardColor: "red"
         ),
         Theme(
             name: "Food",
             emojis: ["🌭", "🌮", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🫐", "🍈", "🍒", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅", "🍆", "🌽", "🥕", "🫒", "🧅", "🥔"],
-            numberOfPairsOfCards: 15,
+            numberOfPairsOfCards: nil,
             cardColor: "yellow"
         ),
         Theme(
             name: "Face",
             emojis: ["😀", "😃", "😄", "😁", "😆", "🥹", "😅", "😂", "🤣", "🥲", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "😚", "😋", "😝"],
-            numberOfPairsOfCards: 19,
+            numberOfPairsOfCards: nil,
             cardColor: "purple"
         )
     ]
     
     static func createMemoryGame(theme: Theme) -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: theme.numberOfPairsOfCards) { pairIndex in
+        MemoryGame<String>(numberOfPairsOfCards: theme.numberOfPairsOfCards ?? theme.emojis.count) { pairIndex in
             theme.emojis[pairIndex]
         }
     }
@@ -73,6 +73,10 @@ class EmojiMemoryGame: ObservableObject {
     
     var score: Int {
         return model.score
+    }
+    
+    var numberOfPairs: Int {
+        return theme.numberOfPairsOfCards!
     }
     
     var cards: Array<MemoryGame<String>.Card> {
