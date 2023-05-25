@@ -69,7 +69,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
             cards.append(Card(content: content, id: pairIndex * 2))
             cards.append(Card(content: content, id: pairIndex * 2 + 1))
         }
-        
         cards.shuffle() // Task 13
     }
     
@@ -81,4 +80,5 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
         var id: Int
     }
 }
+
 
