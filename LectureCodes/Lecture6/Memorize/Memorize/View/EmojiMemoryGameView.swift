@@ -56,7 +56,6 @@ struct CardView: View {
         static let cornerRadius: CGFloat = 10
         static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.7
-        
     }
 }
 
