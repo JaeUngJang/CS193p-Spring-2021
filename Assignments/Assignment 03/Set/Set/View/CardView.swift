@@ -11,7 +11,6 @@ struct CardView: View {
     let card: SetGameViewModel.Card
     
     var body: some View {
-        let rectShape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
         
         // 여기서 typealias로 이름만 바꿔주는 거랑 let으로 선언해주는 것. 어떻게 다른 것인가
         let numberOfShapes = card.content.numberOfShapes
@@ -21,16 +20,18 @@ struct CardView: View {
         
         GeometryReader { geometry in
             ZStack {
-                rectShape.fill().foregroundColor(.white)
-                rectShape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
-                
+                let rectShape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
+
+                    rectShape.fill().foregroundColor(.white)
+                    rectShape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+                    
                 VStack {
                     ForEach(0..<numberOfShapes, id: \.self) { i in
                         ZStack {
                             Image(systemName: "\(shape).fill")
                                 .resizable()
                                 .frame(width: geometry.size.width * 0.8, height: geometry.size.height * 0.2)
-                                .opacity(shade == "solid" ? 1 : shade == "vague" ? 0.3 : 0)
+                                .opacity(shade)
                                 .foregroundColor(stringToColor(color))
                             
                             Image(systemName: "\(shape)")
@@ -40,6 +41,12 @@ struct CardView: View {
                         }
                     }
                 }
+                if card.isSelected {
+                    rectShape.foregroundColor(.gray).opacity(0.5)
+                } else if card.isMatched {
+                    rectShape.fill().foregroundColor(.blue)
+                }
+                    
             }
         }
     }
@@ -53,7 +60,7 @@ struct CardView: View {
         case "purple" :
             return .purple
         default :
-            return .black
+            return .clear
         }
     }
     

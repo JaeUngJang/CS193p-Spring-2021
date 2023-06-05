@@ -14,7 +14,7 @@ struct FeatureModel: Equatable {
     }
     private static let numbersOfShapes = [1, 2, 3]
     private static let shapes = ["suit.diamond", "rectangle", "capsule"]
-    private static let shades = ["solid", "vague", "open"]
+    private static let shades = [1, 0.3, 0]
     private static let colors = ["red", "green", "purple"]
 
     private(set) var features: Array<CardFeature>
@@ -43,7 +43,7 @@ struct FeatureModel: Equatable {
     struct CardFeature: Identifiable, Equatable {
         let numberOfShapes: Int
         let shape: String
-        let shade: String
+        let shade: Double
         let color: String
         let id: UUID
     }

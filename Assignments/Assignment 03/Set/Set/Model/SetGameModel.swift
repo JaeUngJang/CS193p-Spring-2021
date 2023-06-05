@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SetGameModel<CardContent> where CardContent: Equatable {
+struct SetGameModel<Int, CardShape, CardShade, CardColor> where CardColor: Hashable, CardShade: Hashable, CardShape: Hashable {
     
     private(set) var cards: Array<Card>
     
@@ -15,16 +15,30 @@ struct SetGameModel<CardContent> where CardContent: Equatable {
         cards = []
         
         for index in 0..<numberOfCards {
-            let content = createCardContent(index)
-            cards.append(Card(content: content, id: index))
+//            let content = createCardContent(index)
+//            cards.append(Card(content: content, id: index))
         }
     }
     
     
-    struct Card: Identifiable {
+    
+    struct Card: Identifiable, Equatable {
+        
         var isSelected: Bool = false
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
+
+        struct CardContent {
+            let numberOfShapes: Int
+            let shape: CardShape
+            let shade: CardShade
+            let color: CardColor
+        }
+        
+        static func == (lhs: SetGameModel<Int, CardShape, CardShade, CardColor>.Card, rhs: SetGameModel<Int, CardShape, CardShade, CardColor>.Card) -> Bool {
+            lhs.id == rhs.id
+        }
+
     }
 }

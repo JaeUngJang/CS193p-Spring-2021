@@ -31,7 +31,7 @@ class SetGameViewModel: ObservableObject {
     // MARK: - Intent(
     ///
     func choose(_ card: Card) {
-        
+
     }
     
     /// Add 3 more cards
@@ -44,14 +44,9 @@ class SetGameViewModel: ObservableObject {
     func newGame() {
         // FeatureModel 에 있는 features: Array<CardFeature> 을 shuffle()
         SetGameViewModel.featureModel = FeatureModel()
-        
+        // 시작 카드 12장 초기화
+        SetGameViewModel.numberOfCards = 12
         // SetGameModel createSetGameModel 호출해서 초기화
         setModel = SetGameViewModel.createSetGameModel()
-    }
-}
-
-struct Previews_SetGameViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

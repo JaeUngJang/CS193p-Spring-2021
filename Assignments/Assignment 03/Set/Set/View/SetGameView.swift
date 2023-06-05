@@ -27,7 +27,6 @@ struct SetGameView: View {
                     .onTapGesture {
                         game.choose(card)
                         print("\(card)")
-                        print("\(card.content)")
                     }
             }
         }
